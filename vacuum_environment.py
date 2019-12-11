@@ -29,10 +29,11 @@ class Vacuum(pygame.sprite.Sprite):
         self.screen.blit(self.image, (x, y))
         self.rect.x, self.rect.y = x, y
 
+    def clean(self, x, y):
+        # Need to keep track of what is "cleaned" so that I can eventually add score and fitness
+        pygame.draw.circle(background, cleanColor, (x + self.center[0], y + self.center[1]), 50)
+
     def move(self):
         self.y -= 2
         self.clean(self.x, self.y)
         self.display(self.x, self.y)
-
-    def clean(self, x, y):
-        pygame.draw.circle(background, cleanColor, (x + self.center[0], y + self.center[1]), 50)
