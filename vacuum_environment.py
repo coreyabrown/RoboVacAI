@@ -1,8 +1,8 @@
 import pygame
 import math
 
-width = 1024
-height = 768
+width = 1500
+height = 800
 fps = 30
 cleanColor = (255, 248, 220)
 background = pygame.image.load('./wood_floor.jpg')
