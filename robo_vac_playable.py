@@ -13,13 +13,20 @@ def play():
     vacuum = env.Vacuum(display)
 
     while not clean:
+        keys = pygame.key.get_pressed()
+        display.blit(env.background, (0, 0))
+        env.Vacuum.display(vacuum, vacuum.x, vacuum.y)
+
+        if keys[pygame.K_UP]:
+            vacuum.move()
+        if keys[pygame.K_RIGHT]:
+            vacuum.rotate_right()
+        if keys[pygame.K_LEFT]:
+            vacuum.rotate_left()
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
                 sys.exit()
-
-        display.blit(env.background, (0, 0))
-        vacuum.move()
 
         pygame.display.update()
         clock.tick(env.fps)
