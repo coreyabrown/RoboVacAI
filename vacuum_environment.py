@@ -35,8 +35,6 @@ class Vacuum(pygame.sprite.Sprite):
         return center
 
     def display(self, x, y):
-        # self.screen.blit(self.image, (x, y))
-        # self.rect.x, self.rect.y = x, y
         center = self.get_center()
         pos = (x + (self.height / 2), y + (self.height / 2))
         self.blit_rotate(self.screen, self.image, pos, center, self.dir)
@@ -72,7 +70,7 @@ class Vacuum(pygame.sprite.Sprite):
 
     def blit_rotate(self, surf, image, pos, originpos, angle):
 
-        # calcaulate the axis aligned bounding box of the rotated image
+        # calculate the axis aligned bounding box of the rotated image
         w, h = image.get_size()
         box = [pygame.math.Vector2(p) for p in [(0, 0), (w, 0), (w, -h), (0, -h)]]
         box_rotate = [p.rotate(angle) for p in box]
@@ -86,7 +84,7 @@ class Vacuum(pygame.sprite.Sprite):
 
         # calculate the upper left origin of the rotated image
         origin = (
-        pos[0] - originpos[0] + min_box[0] - pivot_move[0], pos[1] - originpos[1] - max_box[1] + pivot_move[1])
+            pos[0] - originpos[0] + min_box[0] - pivot_move[0], pos[1] - originpos[1] - max_box[1] + pivot_move[1])
 
         # get a rotated image
         rotated_image = pygame.transform.rotate(image, angle)
