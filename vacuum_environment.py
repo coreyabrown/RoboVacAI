@@ -17,7 +17,7 @@ possible_score = int(height) * int(width)
 
 def calc_clean_percent():
     cleaned = floor_matrix.sum()
-    clean_percent = round(cleaned / possible_score, 4)
+    clean_percent = round(cleaned / possible_score, 2)
     return clean_percent
 
 
