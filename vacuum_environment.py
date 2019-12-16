@@ -1,5 +1,6 @@
 import pygame
 import math
+import numpy
 
 width = 1500
 height = 800
@@ -8,6 +9,16 @@ cleanColor = (255, 248, 220)
 background = pygame.image.load('./wood_floor.jpg')
 deg = 5
 speed = 5
+
+# Scoring
+floor_matrix = numpy.zeros((width, height), dtype=int)
+possible_score = int(height) * int(width)
+
+
+def calc_clean_percent():
+    cleaned = floor_matrix.sum()
+    clean_percent = round(cleaned / possible_score, 4)
+    return clean_percent
 
 
 class Vacuum(pygame.sprite.Sprite):
@@ -21,6 +32,7 @@ class Vacuum(pygame.sprite.Sprite):
 
         self.rect = self.image.get_rect()
         self.height = self.rect.height
+        self.radius = int(self.height / 2) - 10
         self.screen = displayscreen
 
         self.size = self.image.get_rect().size
@@ -41,7 +53,13 @@ class Vacuum(pygame.sprite.Sprite):
 
     def clean(self, x, y):
         # Need to keep track of what is "cleaned" so that I can eventually add score and fitness
-        pygame.draw.circle(background, cleanColor, (x + self.center[0], y + self.center[1]), 50)
+        i, j = self.center[0], self.center[1]
+        pygame.draw.circle(background, cleanColor, (x + i, y + j), self.radius)
+
+        # update scoring map to reflect what has been cleaned
+        for hor in range(x, x + self.radius * 2):
+            for ver in range(y, y + self.radius * 2):
+                floor_matrix[hor, ver] = 1
 
     def move(self):
         direction = self.get_vector(self.dir)

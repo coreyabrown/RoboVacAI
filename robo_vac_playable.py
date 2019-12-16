@@ -6,10 +6,9 @@ import vacuum_environment as env
 def play():
     pygame.init()
     clean = False
-    cleanPercent = 0.00
     clock = pygame.time.Clock()
     display = pygame.display.set_mode((env.width, env.height))
-    pygame.display.set_caption('Robot Vacuum AI')
+    pygame.display.set_caption('Robot Vacuum Playable')
     vacuum = env.Vacuum(display)
 
     while not clean:
@@ -17,6 +16,7 @@ def play():
         display.blit(env.background, (0, 0))
         env.Vacuum.display(vacuum, vacuum.x, vacuum.y)
 
+        # Game controls
         if keys[pygame.K_UP]:
             vacuum.move()
         if keys[pygame.K_RIGHT]:
@@ -27,6 +27,12 @@ def play():
             if event.type == pygame.QUIT:
                 pygame.quit()
                 sys.exit()
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_s:
+                    print(env.calc_clean_percent())
+
+        # Scoring and timing
+
 
         pygame.display.update()
         clock.tick(env.fps)
