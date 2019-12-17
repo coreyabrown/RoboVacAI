@@ -23,6 +23,7 @@ def play():
         # Game controls
         if keys[pygame.K_UP]:
             vacuum.move()
+            vacuum.obstacle_detect()
         if keys[pygame.K_RIGHT]:
             vacuum.rotate_right()
         if keys[pygame.K_LEFT]:

@@ -61,6 +61,13 @@ class Vacuum(pygame.sprite.Sprite):
             for ver in range(y, y + self.radius * 2):
                 floor_matrix[hor, ver] = 1
 
+    def obstacle_detect(self):
+        obstacle = True
+        direction = self.get_vector(self.dir)
+        if width - self.height > self.x - direction[0] > 0 and height - self.height > self.y - direction[1] > 0:
+            obstacle = False
+        return obstacle
+
     def move(self):
         direction = self.get_vector(self.dir)
         if width - self.height > self.x - direction[0] > 0 and height - self.height > self.y - direction[1] > 0:
